@@ -1,0 +1,133 @@
+[
+    {
+        "id": 1,
+        "name": "Music Concert",
+        "description": "A great music concert featuring famous bands.",
+        "date": "2024-06-20T19:00:00Z",
+        "time": "7:00 PM",
+        "image": "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bXVzaWMlMjBmZXN0aXZhbHxlbnwwfHwwfHx8MA%3D%3D",
+        "city": "New York",
+        "country": "USA",
+        "price":"2000"
+    },
+    {
+        "id": 2,
+        "name": "Art Exhibition",
+        "description": "Exhibition showcasing local artists.",
+        "date": "2024-06-25T10:00:00Z",
+        "time": "10:00 AM",
+        "image":"https://images.unsplash.com/photo-1685304120514-3ae627e4845f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGFydCUyMGV4aGliaXRpb25zJTIwaW4lMjB1c2F8ZW58MHx8MHx8fDA%3D",
+        "city": "Paris",
+        "country": "France",
+        "price":"1000"
+    },
+    {
+        "id": 3,
+        "name": "Food Festival",
+        "description": "A festival with various food stalls.",
+        "date": "2024-07-01T12:00:00Z",
+        "time": "12:00 PM",
+        "image": "https://images.unsplash.com/photo-1629642621587-9947ce328799?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGZvb2QlMjBkaXNwbGF5JTIwaW4lMjBqYXBhbnxlbnwwfHwwfHx8MA%3D%3D",
+        "city": "Tokyo",
+        "country": "Japan",
+        "price":"4000"
+    },
+    {
+        "id": 4,
+        "name": "Tech Conference",
+        "description": "A conference with tech talks and workshops.",
+        "date": "2024-07-05T09:00:00Z",
+        "time": "9:00 AM",
+        "image": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGRldmVsb3BlciUyMCUyMGNvbmZlcmVuY2UlMjBpbiUyMHNpbGljb25lJTIwdmFsbGV5fGVufDB8fDB8fHww",
+        "city": "San Francisco",
+        "country": "USA",
+        "price":"100"
+    },
+    {
+        "id": 5,
+        "name": "Book Fair",
+        "description": "A fair with a variety of books for sale.",
+        "date": "2024-07-10T11:00:00Z",
+        "time": "11:00 AM",
+        "image": "https://images.unsplash.com/photo-1491841573634-28140fc7ced7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGxvbmRvbiUyMEJvb2slMjBGYWlyfGVufDB8fDB8fHww",
+        "city": "London",
+        "country": "UK",
+        "price":"3000"
+    },
+    {
+        "id": 6,
+        "name": "Film Festival",
+        "description": "A festival showcasing independent films.",
+        "date": "2024-07-15T18:00:00Z",
+        "time": "6:00 PM",
+        "image": "https://images.unsplash.com/photo-1503638454472-b9c1ed258357?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGZpbG0lMjBmZXN0aXZhbCUyMGluJTIwY2FuYWRhfGVufDB8fDB8fHww",
+        "city": "Los Angeles",
+        "country": "USA",
+        "price":"5000"
+    },
+    {
+        "id": 7,
+        "name": "Marathon",
+        "description": "A marathon event for charity.",
+        "date": "2024-07-20T06:00:00Z",
+        "time": "6:00 AM",
+        "image": "https://images.unsplash.com/photo-1596727362302-b8d891c42ab8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bG9uZG9uJTIwbWFyYXRob258ZW58MHx8MHx8fDA%3D",
+        "city": "Berlin",
+        "country": "Germany",
+        "price":"400"
+    },
+    {
+        "id": 8,
+        "name": "Science Fair",
+        "description": "A fair showcasing science projects by students.",
+        "date": "2024-07-25T10:00:00Z",
+        "time": "10:00 AM",
+        "image": "https://images.unsplash.com/photo-1554475900-0a0350e3fc7b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8U2NpZW5jZXxlbnwwfHwwfHx8MA%3D%3D",
+        "city": "Toronto",
+        "country": "Canada",
+        "price":"2000"
+    },
+    {
+        "id": 9,
+        "name": "Theater Play",
+        "description": "A play performed by a local theater group.",
+        "date": "2024-07-30T19:00:00Z",
+        "time": "7:00 PM",
+        "image": "https://images.unsplash.com/photo-1604495042007-cc3cea420ff6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fFRoZWF0ZXIlMjBQbGF5fGVufDB8fDB8fHww",
+        "city": "Sydney",
+        "country": "Australia",
+        "price":"4000"
+    },
+    {
+        "id": 10,
+        "name": "Wine Tasting",
+        "description": "A wine tasting event featuring local wineries.",
+        "date": "2024-08-05T17:00:00Z",
+        "time": "5:00 PM",
+        "image": "https://images.unsplash.com/photo-1515778767554-42d4b373f2b3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8V2luZSUyMFRhc3RpbmclMjBzcGFpbnxlbnwwfHwwfHx8MA%3D%3D",
+        "city": "Barcelona",
+        "country": "Spain",
+        "price":"5000"
+    },
+    {
+        "id": 11,
+        "name": "Craft Workshop",
+        "description": "A workshop on making crafts.",
+        "date": "2024-08-10T13:00:00Z",
+        "time": "1:00 PM",
+        "image": "https://images.unsplash.com/photo-1518732836484-bd257665c9d1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Q3JhZnQlMjBXb3Jrc2hvcCUyMGV4Yml0aW9ufGVufDB8fDB8fHww",
+        "city": "Florence",
+        "country": "Italy",
+        "price":"2000"
+    },
+    {
+        "id": 12,
+        "name": "Cooking Class",
+        "description": "A class on cooking Italian cuisine.",
+        "date": "2024-08-15T14:00:00Z",
+        "time": "2:00 PM",
+        "image": "https://images.unsplash.com/photo-1507048331197-7d4ac70811cf?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29va2luZyUyMGNsYXNzfGVufDB8fDB8fHww",
+        "city": "Rome","country": "Italy",
+        "price":"2000"
+    }
+]
