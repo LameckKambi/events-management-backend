@@ -104,6 +104,7 @@ Use Postman application to check te following endpoints
   /event - Add an event.
   /events - list all events.
   /events/<int:id> - fetch one event details.
+  /events/<int:id> - DELETE - delete an event
   /attendances - POST - Booking an event.
   /attendances - GET - Fetching events attended by user.
   
@@ -200,6 +201,17 @@ Use Postman application to check te following endpoints
 - Success Response:
   - Code: 200
   - Content: `{ "event_dict" }`
+
+
+#### Event
+
+- URL: `/events/<int:id>`
+- Method: `DELETE`
+- Success Response:
+  - Code: 200
+  - Content: `{
+        "message": "Event deleted."
+    }`
 
 
 #### Attendances

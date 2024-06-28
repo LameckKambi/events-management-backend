@@ -117,6 +117,22 @@ def get_event_detail(id):
     # return jsonify({'data': event}), 200
 
 
+@app.route('/events/<int:id>', methods=['DELETE'])
+def delete_event(id):
+    event = Event.query.filter_by(id=id).first()
+    if not event:
+        return jsonify({"error": "Event not found"}), 404
+
+    Attendance.query.filter_by(eventid=id).delete()
+
+    db.session.delete(event)
+    db.session.commit()
+    response_body = {
+        "message": "Event deleted."
+    }
+    return jsonify(response_body), 200
+
+
 @app.route('/attendances', methods=['POST'])
 def create_attendance():
     data = request.get_json()
@@ -124,7 +140,7 @@ def create_attendance():
     userid = data['userid']
     attendance = data['attendance']
 
-    # Check if the attendance already exists
+
     existing_attendance = Attendance.query.filter_by(eventid=eventid, userid=userid).first()
     if existing_attendance:
         return jsonify({"error": "Already attending this event"}), 400
