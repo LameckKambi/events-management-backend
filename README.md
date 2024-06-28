@@ -1,33 +1,24 @@
 # Event Management API
 
-This document provides a comprehensive guide to setting up, configuring, and using the backend API for an event management system. The API is built using Flask, SQLAlchemy, and Flask-Login, and allows for user authentication and event management.
+This document provides a comprehensive guide to setting up, configuring, and using the backend API for an event management system. The API is built using Flask, SQLAlchemy and Redis.It allows for user authentication and event management.
 
-## Table of Contents
+## Requirements
 
-- [Features](https://github.com/collinsbett023/events-management-backend?tab=readme-ov-file#features)
-- [Installation](https://github.com/collinsbett023/events-management-backend?tab=readme-ov-file#installation)
-- [Configuration](https://github.com/collinsbett023/events-management-backend?tab=readme-ov-file#configuration)
-- [Usage](https://github.com/collinsbett023/events-management-backend?tab=readme-ov-file#usage)
-- [API Endpoints](https://github.com/collinsbett023/events-management-backend?tab=readme-ov-file#api-endpoints)
-  - [Authentication](https://github.com/collinsbett023/events-management-backend?tab=readme-ov-file#authentication)
-    - [Sign Up](https://github.com/collinsbett023/events-management-backend?tab=readme-ov-file#signup)
-    - [Login](https://github.com/collinsbett023/events-management-backend?tab=readme-ov-file#login)
-    - [Logout](https://github.com/collinsbett023/events-management-backend?tab=readme-ov-file#logout)
-- [Example Requests](https://collinsbett023/events-management-backend?tab=readme-ov-file#example-requests)
-  - [Using `curl` for API Requests](https://github.com/collinsbett023/events-management-backend?tab=readme-ov-file#using-curl-for-api-requests)
-    - [Sign Up:](https://github.com/collinsbett023/events-management-backend?tab=readme-ov-file#sign-up)
-    - [Login:](https://github.com/collinsbett023/events-management-backend?tab=readme-ov-file#login-1)
-    - [Logout:](https://github.com/collinsbett023/events-management-backend?tab=readme-ov-file#logout-1)
-- [Contributing](https://github.com/collinsbett023/events-management-backend?tab=readme-ov-file#contributing)
-- [License](https://github.com/collinsbett023/events-management-backend?tab=readme-ov-file#license)
+- Python
+- Postman - Testing Endpoints.
+- Redis - Session Manager.
 
 ## Features
 
 - User authentication (signup, login, logout)
 - Secure password hashing with bcrypt.
-- Session management with Flask-Login
+- Session management with Redis.
 - CORS support for cross-origin requests.
-- Database migrations with Flask-Migrate
+- Database migrations with Flask-Migrate.
+- Endpoint for creating an event.
+- Endpoint for listing events.
+- Endpoint for booking an event.
+- Endpoint for listing events.
 
 ## Installation 
 
@@ -36,14 +27,14 @@ This document provides a comprehensive guide to setting up, configuring, and usi
 - Use the following command to clone the repository to your local machine:
   
 ```bash
-- git clone git@github.com:collinsbett023/events-management-backend.git
-then,
-- cd event-management-api
+git@github.com:collinsbett023/events-management-backend.git
+cd event-management-backend
 ```
 
 2. **Create a virtual environment**:
 
-- A virtual environment is necessary to manage dependencies and isolate them from the global Python environment. Create and activate a virtual environment with these commands:
+- A virtual environment is necessary to manage dependencies and isolate them from the global Python environment. 
+- Create and activate a virtual environment with these commands:
 
 ```bash
 python3 -m venv env
@@ -69,21 +60,18 @@ flask db migrate
 flask db upgrade
 ```
 
-5. **Seed the database**:
-
-- I have a `seed.py` file, to populate the database with initial data, run this command:
-
-```bash
-python seed.py
-```
 
 ## Configuration
 
-Configuration settings are managed in the `server/config.py` file. Here are the key settings:
+Configuration settings are managed in the `app/configuration.py` file. Here are the key settings:
 
 - `SQLALCHEMY_DATABASE_URI`: The URI of the database to connect to.
 - `SECRET_KEY`: A secret key used for session management and other security-related features.
 - `SQLALCHEMY_TRACK_MODIFICATIONS`: Is set to `False` to disable modification tracking and save resources.
+- `SESSION_TYPE` = "redis"
+- `SESSION_PERMANENT` = False
+- `SESSION_USE_SIGNER` = True
+- `SESSION_REDIS` = redis.from_url("redis://red-cptadmeehbks73f1of80:6379")
 
 ## Usage
 
@@ -92,7 +80,7 @@ Configuration settings are managed in the `server/config.py` file. Here are the 
 - Start the Flask application with the following command:
 
 ```bash
-flask run #or  Option 2: python manage.py
+flask run #or  Option 2: python run.py
 ```
 
 - The server will start and listen for requests at `http://localhost:5000`.
@@ -102,12 +90,24 @@ flask run #or  Option 2: python manage.py
 - If you prefer using Docker, you can build and run the application using these commands:
 
 ```bash
-docker build -t event-management-api .
-docker run -p 5000:5000 event-management-api
+docker build -t event-management-backend.
+docker run -p 5000:5000 event-management-backend.
 
 ```
 
 ## API Endpoints
+Use Postman application to check te following endpoints
+```
+  /register - User Signup.
+  /login - User Login.
+  /logout - User Logout.
+  /event - Add an event.
+  /events - list all events.
+  /events/<int:id> - fetch one event details.
+  /attendances - POST - Booking an event.
+  /attendances - GET - Fetching events attended by user.
+  
+```
 
 ### Authentication
 
@@ -152,11 +152,12 @@ docker run -p 5000:5000 event-management-api
 
 - Success Response:
   - Code: 200
-  - Content: `{ "message": "Login successful" }`
+- Content: `{ "id": user.id,
+             "email": user.email }`
   
 - Error Response:
   - Code: 401
-  - Content: `{ "message": "Invalid credentials" }`
+  - Content: `{"error": "Unauthorized"}`
 
 
 #### Logout
@@ -165,54 +166,85 @@ docker run -p 5000:5000 event-management-api
 - Method: `GET`
 - Success Response:
   - Code: 200
-  - Content: `{ "message": "Logged out successfully" }`
+  - Content: `{ "message": "Logout successful" }`
 
 
-## Example Requests
+#### Event 
 
-### Using `curl` for API Requests
+- URL: `/event`
+- Method: `POST`
+- Success Response:
+  - Code: 201
+  - Content: `{ "status": "Success",
+        "message": "Added event successfully",
+        "data": event data }`
 
-#### Sign Up:
 
-Use this `curl` command to send a signup request to the API:
+#### Events
 
-```bash
-curl -X POST http://localhost:5000/signup \
--H "Content-Type: application/json" \
--d '{
-    "username": "collins001",
-    "email": "collinsbett35@gmail.com",
-    "password": "aldfwieo234"
-}'
-```
+- URL: `/events`
+- Method: `GET`
+- Success Response:
+  - Code: 200
+  - Content: `{
+        "status": "Success",
+        "message": "Events fetched successfully",
+        "data": events_data
+    }`
 
-#### Login:
 
-Use this `curl` command to send a login request to the API:
+#### Event
 
-```bash
-curl -X POST http://localhost:5000/login \
--H "Content-Type: application/json" \
--d '{
-    "email": "collinsbett35@gmail.com",
-    "password": "aldfwieo234"
-}'
+- URL: `/events/<int:id>`
+- Method: `GET`
+- Success Response:
+  - Code: 200
+  - Content: `{ "event_dict" }`
 
-```
 
-#### Logout:
+#### Attendances
+- URL: `/attendances`
+- Method: `POST`
+- Success Response:
+  - Code: 201
+  - Content: `{
+        "status": "Success",
+        "message": "Added attendance successfully",
+        "data": attendance_dict
+    }`
 
-Use this `curl` command to send a logout request to the API:
 
-```bash
-curl -X GET http://localhost:5000/logout
-
-```
-
-## Contributing
-
-Please feel free to send me a [pull request](https://github.com/collinsbett023/events-management-backend/pulls) or open an [issue](https://github.com/collinsbett023/events-management-backend/issues) incase of any bugs.
-
+#### Attendances
+- URL: `/attendances`
+- Method: `GET`
+- Success Response:
+  - Code: 200
+  - Content: `{
+        "status": "Success",
+        "message": "Attendances fetched successfully",
+        "data": attendances_data
+    }`
+    
 ## License 
 
-See [MIT Licensed](https://github.com/collinsbett023/events-management-backend/blob/main/LICENSE)
+MIT License
+
+Copyright (c) 2024 Collinsbett023,LameckKambi,SafnetCo2,Oriri04 & Dinah-Ngatia5.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
