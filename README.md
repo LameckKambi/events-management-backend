@@ -36,8 +36,9 @@ This document provides a comprehensive guide to setting up, configuring, and usi
 - Use the following command to clone the repository to your local machine:
   
 ```bash
-git@github.com:Dinah-Ngatia5/event-management-api.git
-cd event-management-api
+- git clone git@github.com:collinsbett023/events-management-backend.git
+then,
+- cd event-management-api
 ```
 
 2. **Create a virtual environment**:
