@@ -140,7 +140,6 @@ def create_attendance():
     userid = data['userid']
     attendance = data['attendance']
 
-
     existing_attendance = Attendance.query.filter_by(eventid=eventid, userid=userid).first()
     if existing_attendance:
         return jsonify({"error": "Already attending this event"}), 400
